@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Białe Tło</title>
+    <style>
+        body {
+            background-color: white; /* Ustawienie koloru tła na biały */
+            margin: 0; /* Usunięcie marginesów */
+            padding: 0; /* Usunięcie paddingu */
+            overflow: hidden; /* Usunięcie przewijania */
+        }
+    </style>
+</head>
+<body>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Rozwijane</title>
+    <style>
+        /* Styl dla ikony menu (trzy kreski) */
+        #menu-icon {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            z-index: 9999; /* Aby ikona była na wierzchu */
+        }
+
+        /* Styl dla rozwijanego menu */
+        #menu {
+            position: fixed;
+            top: 0;
+            left: -200px; /* Ukryj menu poza ekranem */
+            width: 200px;
+            height: 100%;
+            background-color: #333;
+            transition: left 0.3s; /* Animacja przesuwania menu */
+            z-index: 9998; /* Aby menu było pod ikoną */
+        }
+
+        /* Styl dla opcji w menu */
+        #menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #menu ul li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        #menu ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ikona menu (trzy kreski) -->
+    <div id="menu-icon">&#9776;</div>
+    
+    <!-- Menu rozwijane -->
+    <div id="menu">
+        <ul>
+            <li><a href="#">Opcja 1</a></li>
+            <li><a href="#">Opcja 2</a></li>
+            <li><a href="#">Opcja 3</a></li>
+        </ul>
+    </div>
+
+    <!-- JavaScript do obsługi rozwijania/zwijania menu -->
+    <script>
+        var menu = document.getElementById('menu');
+        var menuIcon = document.getElementById('menu-icon');
+        
+        // Obsługa kliknięcia na ikonę menu
+        menuIcon.addEventListener('click', function() {
+            if (menu.style.left === '0px') {
+                menu.style.left = '-200px'; // Zwiń menu do początkowego stanu
+            } else {
+                menu.style.left = '0px'; // Rozwiń menu
+            }
+        });
+
+        // Obsługa kliknięcia poza menu, aby je zwijać
+        document.addEventListener('click', function(event) {
+            var isClickInsideMenu = menu.contains(event.target);
+            var isClickOnMenuIcon = menuIcon.contains(event.target);
+
+            if (!isClickInsideMenu && !isClickOnMenuIcon && menu.style.left === '0px') {
+                menu.style.left = '-200px'; // Zwiń menu do początkowego stanu
+            }
+        });
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona z Logowaniem</title>
+    <style>
+        /* Styl dla ikony logowania (niebieski prostokąt z napisem) */
+        #login-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            z-index: 9999; /* Aby ikona była na wierzchu */
+            width: 120px; /* Szerokość ikony */
+            height: 40px; /* Wysokość ikony */
+            background-color: #0074D9; /* Niebieskie tło */
+            color: white; /* Kolor tekstu */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px; /* Zaokrąglenie narożników */
+        }
+
+        /* Styl dla okna logowania */
+        #login-box {
+            display: none; /* Ukryj okno logowania na początku */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            z-index: 9998; /* Aby okno logowania było nad innymi elementami */
+        }
+
+        /* Styl dla formularza logowania */
+        #login-form {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ikona logowania (niebieski prostokąt z napisem) -->
+    <div id="login-icon">Zaloguj się</div>
+    
+    <!-- Okno logowania -->
+    <div id="login-box">
+        <h2>Zaloguj się</h2>
+        <form id="login-form" action="proces_logowania.php" method="POST">
+            <label for="username">Nazwa użytkownika:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Hasło:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit">Zaloguj</button>
+        </form>
+    </div>
+
+    <!-- JavaScript do obsługi pokazywania/ukrywania okna logowania -->
+    <script>
+        var loginIcon = document.getElementById('login-icon');
+        var loginBox = document.getElementById('login-box');
+
+        // Obsługa kliknięcia na ikonę logowania
+        loginIcon.addEventListener('click', function() {
+            if (loginBox.style.display === 'block') {
+                loginBox.style.display = 'none'; // Ukryj okno logowania
+            } else {
+                loginBox.style.display = 'block'; // Pokaż okno logowania
+            }
+        });
+
+        // Obsługa kliknięcia poza okno logowania, aby je ukryć
+        document.addEventListener('click', function(event) {
+            var isClickInsideLoginBox = loginBox.contains(event.target);
+            var isClickOnLoginIcon = loginIcon.contains(event.target);
+
+            if (!isClickInsideLoginBox && !isClickOnLoginIcon && loginBox.style.display === 'block') {
+                loginBox.style.display = 'none'; // Ukryj okno logowania
+            }
+        });
+    </script>
+</body>
+</html>
